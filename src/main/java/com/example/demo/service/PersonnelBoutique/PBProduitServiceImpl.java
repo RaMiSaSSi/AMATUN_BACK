@@ -87,7 +87,7 @@
                 Produit produit = produitRepository.findById(produitId)
                         .orElseThrow(() -> new IllegalArgumentException("Produit not found with id: " + produitId));
                 produit.setNom(produitDTO.getNom());
-                produit.setImage(produitDTO.getImage());
+                /*produit.setImage(produitDTO.getImage());*/
                 produit.setDescription(produitDTO.getDescription());
                 produit.setPrix(produitDTO.getPrix());
                 produit.setQuantite(produitDTO.getQuantite());
@@ -113,7 +113,7 @@
                 ProduitDTO dto = new ProduitDTO();
                 dto.setId(produit.getId());
                 dto.setNom(produit.getNom());
-                dto.setImage(produit.getImage());
+                /*dto.setImage(produit.getImage());*/
                 dto.setDescription(produit.getDescription());
                 dto.setPrix(produit.getPrix());
                 dto.setQuantite(produit.getQuantite());
@@ -130,7 +130,7 @@
             private Produit toEntity(ProduitDTO dto) {
                 Produit produit = new Produit();
                 produit.setNom(dto.getNom());
-                produit.setImage(dto.getImage());
+                /*produit.setImage(dto.getImage());*/
                 produit.setDescription(dto.getDescription());
                 produit.setPrix(dto.getPrix());
                 produit.setQuantite(dto.getQuantite());

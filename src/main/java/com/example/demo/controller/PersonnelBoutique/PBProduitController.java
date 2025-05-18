@@ -54,7 +54,7 @@
             produitDTO.setQuantite(quantite);
             produitDTO.setCategorieId(categorieId);
             produitDTO.setSousCategorieId(sousCategorieId);
-            produitDTO.setImage(imageBytes);
+            /*produitDTO.setImage(imageBytes);*/
 
             ProduitDTO createdProduit = pbProduitService.createProduitForPersonnelBoutique(personnelBoutiqueId, produitDTO);
             return ResponseEntity.ok(createdProduit);
@@ -80,10 +80,10 @@
             ProduitDTO existingProduit = pbProduitService.getProduitById(produitId);
 
             // Convert MultipartFile to byte array if provided, otherwise use the existing image
-            byte[] imageBytes = existingProduit.getImage();
+           /* byte[] imageBytes = existingProduit.getImage();
             if (image != null) {
                 imageBytes = image.getBytes();
-            }
+            }*/
 
             // Create the product DTO
             ProduitDTO produitDTO = new ProduitDTO();
@@ -97,7 +97,7 @@
             produitDTO.setStartDate(startDate != null ? startDate : existingProduit.getStartDate());
             produitDTO.setCategorieId(categorieId);
             produitDTO.setSousCategorieId(sousCategorieId);
-            produitDTO.setImage(imageBytes);
+            /*produitDTO.setImage(imageBytes);*/
 
             ProduitDTO updatedProduit = pbProduitService.updateProduitForPersonnelBoutique(personnelBoutiqueId, produitId, produitDTO);
             return ResponseEntity.ok(updatedProduit);

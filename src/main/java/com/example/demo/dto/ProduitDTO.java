@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public class ProduitDTO {
     private Long id;
     private String nom;
-    private byte[] image;
+    /*private byte[] image;*/
     private String description;
     private double prix;
     private int quantite;
@@ -39,13 +39,13 @@ public class ProduitDTO {
         this.nom = nom;
     }
 
-    public byte[] getImage() {
+    /*public byte[] getImage() {
         return image;
     }
 
     public void setImage(byte[] image) {
         this.image = image;
-    }
+    }*/
 
     public String getDescription() {
         return description;

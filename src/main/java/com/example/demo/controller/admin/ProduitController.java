@@ -63,7 +63,7 @@
                             produitDTO.setBoutiqueId(boutiqueId);
                             produitDTO.setCategorieId(categorieId);
                             produitDTO.setSousCategorieId(sousCategorieId);
-                            produitDTO.setImage(imageBytes);
+                            /*produitDTO.setImage(imageBytes);*/
                             if (image != null) {
                                 String imagePath = saveFile(image, "uploads/produits");
                                 produitDTO.setImagePath(imagePath);
@@ -91,10 +91,10 @@
 
                             ProduitDTO existingProduit = produitService.getProduitById(produitId);
 
-                            byte[] imageBytes = existingProduit.getImage();
+                            /*byte[] imageBytes = existingProduit.getImage();
                             if (image != null) {
                                 imageBytes = image.getBytes();
-                            }
+                            }*/
 
                             ProduitDTO produitDTO = new ProduitDTO();
                             produitDTO.setNom(nom);
@@ -108,7 +108,7 @@
                             produitDTO.setBoutiqueId(boutiqueId);
                             produitDTO.setCategorieId(categorieId);
                             produitDTO.setSousCategorieId(sousCategorieId);
-                            produitDTO.setImage(imageBytes);
+                            /*produitDTO.setImage(imageBytes);*/
                             if (image != null) {
                                 String imagePath = saveFile(image, "uploads/produits");
                                 produitDTO.setImagePath(imagePath);

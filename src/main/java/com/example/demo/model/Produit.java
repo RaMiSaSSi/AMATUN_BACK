@@ -17,8 +17,8 @@ public class Produit {
 
     private String nom;
 
-    @Lob
-    private byte[] image;
+    //@Lob
+    //private byte[] image;
     private String description;
     private double prix;
     private int quantite;
@@ -61,13 +61,13 @@ public class Produit {
         this.nom = nom;
     }
 
-    public byte[] getImage() {
+    /*public byte[] getImage() {
         return image;
-    }
+    }*/
 
-    public void setImage(byte[] image) {
+    /*public void setImage(byte[] image) {
         this.image = image;
-    }
+    }*/
 
     public String getDescription() {
         return description;
@@ -169,7 +169,7 @@ public class Produit {
         ProduitDTO dto = new ProduitDTO();
         dto.setId(this.id);
         dto.setNom(this.nom);
-        dto.setImage(this.image);
+        /*dto.setImage(this.image);*/
         dto.setDescription(this.description);
         dto.setPrix(this.prix);
         dto.setQuantite(this.quantite);
