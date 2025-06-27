@@ -12,5 +12,6 @@ public interface AuthService {
     UtilisateurInscrit findByEmail(String email);
     UtilisateurInscrit updateUtilisateurInscrit(long id, UtilisateurInscrit utilisateurInscrit);
     boolean emailExists(String email);
+    UtilisateurInscritDTO getUserInfo(String jwtToken);
 
 }

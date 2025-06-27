@@ -6,7 +6,6 @@ import com.example.demo.model.SousCategorie;
 public class SousCategorieDTO {
     private long id;
     private String nom;
-    private byte[] image;
     private Long categorieId;
     private Long boutiqueId;
 
@@ -14,10 +13,9 @@ public class SousCategorieDTO {
     public SousCategorieDTO() {
     }
 
-    public SousCategorieDTO(long id, String nom, byte[] image) {
+    public SousCategorieDTO(long id, String nom) {
         this.id = id;
         this.nom = nom;
-        this.image = image;
     }
 // Getters and Setters
 
@@ -37,13 +35,7 @@ public class SousCategorieDTO {
         this.nom = nom;
     }
 
-    public byte[] getImage() {
-        return image;
-    }
 
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
 
     public Long getCategorieId() {
         return categorieId;

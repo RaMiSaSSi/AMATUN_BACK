@@ -27,4 +27,5 @@ public interface ProduitRepository extends JpaRepository<Produit, Long> {
     Page<Produit> findByBoutiqueId(Long boutiqueId, Pageable pageable);
     @Query("SELECT p FROM Produit p ORDER BY p.quantite DESC") // Example: Popular products based on quantity
     List<Produit> findPopularProducts(@Param("limit") int limit);
+    int countByBoutiqueId(Long boutiqueId);
 }

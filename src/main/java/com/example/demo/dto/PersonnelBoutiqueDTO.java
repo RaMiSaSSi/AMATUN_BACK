@@ -5,7 +5,6 @@ package com.example.demo.dto;
             private String motDePasse;
             private String username;
             private long boutiqueId;
-
             // Getters and setters
             public String getEmail() {
                 return email;
@@ -38,4 +37,6 @@ package com.example.demo.dto;
             public void setBoutiqueId(long boutiqueId) {
                 this.boutiqueId = boutiqueId;
             }
+
+
         }

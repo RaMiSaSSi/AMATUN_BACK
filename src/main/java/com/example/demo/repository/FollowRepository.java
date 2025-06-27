@@ -16,4 +16,6 @@ public interface FollowRepository extends JpaRepository<Follow, Long> {
     boolean existsByUtilisateurAndBoutique(UtilisateurInscrit utilisateur, Boutique boutique);
     Optional<Follow> findByUtilisateurAndBoutique(UtilisateurInscrit utilisateur, Boutique boutique);
     List<Follow> findByBoutiqueId(Long boutiqueId);
+    int countByBoutique(Boutique boutique);
+
 }

@@ -48,5 +48,10 @@ public class UBoutiqueController {
         List<BoutiqueDTO> boutiques = uBoutiqueService.searchBoutiques(keyword);
         return ResponseEntity.ok(boutiques);
     }
+    @GetMapping("/{id}/followers/count")
+    public ResponseEntity<Integer> getFollowersCount(@PathVariable Long id) {
+        int count = uBoutiqueService.getFollowersCount(id);
+        return ResponseEntity.ok(count);
+    }
 
 }

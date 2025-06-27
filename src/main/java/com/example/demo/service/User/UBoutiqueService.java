@@ -13,5 +13,5 @@ public interface UBoutiqueService {
     void followBoutique(Long utilisateurId, Long boutiqueId); // Add this method
     void unfollowBoutique(Long utilisateurId, Long boutiqueId); // New method
     List<BoutiqueDTO> searchBoutiques(String keyword); // New method
-
+    int getFollowersCount(Long boutiqueId);
 }

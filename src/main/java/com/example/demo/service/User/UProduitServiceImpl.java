@@ -64,4 +64,8 @@ public class UProduitServiceImpl implements UProduitService {
         List<Produit> produits = produitRepository.searchByName(keyword);
         return produits.stream().map(Produit::toDTO).collect(Collectors.toList());
     }
+    @Override
+    public int countProduitsByBoutiqueId(Long boutiqueId) {
+        return produitRepository.countByBoutiqueId(boutiqueId);
+    }
 }

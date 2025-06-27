@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "dtype", discriminatorType = DiscriminatorType.STRING)
 public class UtilisateurInscrit  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +27,7 @@ public class UtilisateurInscrit  {
     private Adresse adresseLivraison;
     @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Follow> followedBoutiques = new HashSet<>();
-
+    private boolean firstLogin = false;
 
     // Getters and setters
     public long getId() {
@@ -62,6 +61,7 @@ public class UtilisateurInscrit  {
     public void setDateInscription(Date dateInscription) {
         this.dateInscription = dateInscription;
     }
+
 
     public Role getRole() {
         return role;
@@ -111,6 +111,14 @@ public class UtilisateurInscrit  {
         this.followedBoutiques = followedBoutiques;
     }
 
+    public boolean isFirstLogin() {
+        return firstLogin;
+    }
+
+    public void setFirstLogin(boolean firstLogin) {
+        this.firstLogin = firstLogin;
+    }
+
     public UtilisateurInscritDTO getDTO() {
         UtilisateurInscritDTO dto = new UtilisateurInscritDTO();
         dto.setId(id);
@@ -122,7 +130,6 @@ public class UtilisateurInscrit  {
         dto.setDateInscription(dateInscription);
         dto.setRole(role);
         dto.setAdresseLivraison(adresseLivraison.toDTO());
-
         return dto;
     }
 }

@@ -10,7 +10,6 @@ import jakarta.persistence.ManyToOne;
 @DiscriminatorValue("PERSONNEL_BOUTIQUE")
 public class PersonnelBoutique extends UtilisateurInscrit {
     private String username;
-
     @ManyToOne
     @JoinColumn(name = "boutique_id")
     private Boutique boutique;
@@ -23,6 +22,7 @@ public class PersonnelBoutique extends UtilisateurInscrit {
     public void setUsername(String username) {
         this.username = username;
     }
+
 
     public Boutique getBoutique() {
         return boutique;

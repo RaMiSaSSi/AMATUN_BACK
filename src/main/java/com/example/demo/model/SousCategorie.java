@@ -12,8 +12,7 @@
             @GeneratedValue(strategy = GenerationType.IDENTITY)
             private long id;
             private String nom;
-            @Lob
-            private byte[] image;
+
             @ManyToOne
             @JoinColumn(name = "categorie_id")
             private Categorie categorie;
@@ -35,13 +34,6 @@
                 this.nom = nom;
             }
 
-            public byte[] getImage() {
-                return image;
-            }
-
-            public void setImage(byte[] image) {
-                this.image = image;
-            }
 
             public Categorie getCategorie() {
                 return categorie;
@@ -60,7 +52,7 @@
     }
 
     public SousCategorieDTO toDTO() {
-                SousCategorieDTO dto = new SousCategorieDTO(this.id, this.nom, this.image);
+                SousCategorieDTO dto = new SousCategorieDTO(this.id,this.nom);
                 if (this.categorie != null) {
                     dto.setCategorieId(this.categorie.getId());
                     // Retrieve the boutiqueId through the BoutiqueCategorie relationship

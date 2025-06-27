@@ -49,7 +49,6 @@ package com.example.demo.service.Admin;
         SousCategorieDTO dto = new SousCategorieDTO();
         dto.setId(sousCategorie.getId());
         dto.setNom(sousCategorie.getNom());
-        dto.setImage(sousCategorie.getImage());
         dto.setCategorieId(sousCategorie.getCategorie().getId());
         // Retrieve the boutiqueId through the BoutiqueCategorie relationship
         sousCategorie.getCategorie().getBoutiqueCategories().stream()
@@ -62,7 +61,6 @@ package com.example.demo.service.Admin;
         SousCategorie sousCategorie = sousCategorieRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("SousCategorie not found with id: " + id));
         sousCategorie.setNom(sousCategorieDTO.getNom());
-        sousCategorie.setImage(sousCategorieDTO.getImage());
         sousCategorie.setCategorie(sousCategorie.getCategorie());
         // Update other fields as needed
         SousCategorie updatedSousCategorie = sousCategorieRepository.save(sousCategorie);
@@ -72,7 +70,6 @@ package com.example.demo.service.Admin;
                 SousCategorie sousCategorie = new SousCategorie();
                 sousCategorie.setId(sousCategorieDTO.getId());
                 sousCategorie.setNom(sousCategorieDTO.getNom());
-                sousCategorie.setImage(sousCategorieDTO.getImage());
 
                 Categorie categorie = categorieRepository.findById(sousCategorieDTO.getCategorieId())
                         .orElseThrow(() -> new IllegalArgumentException("Categorie not found"));

@@ -80,7 +80,6 @@ package com.example.demo.service.PersonnelBoutique;
                                                             throw new IllegalArgumentException("SousCategorie not associated with the personnel's boutique");
                                                         }
                                                         existingSousCategorie.setNom(sousCategorie.getNom());
-                                                        existingSousCategorie.setImage(sousCategorie.getImage());
                                                         SousCategorie updatedSousCategorie = sousCategorieRepository.save(existingSousCategorie);
                                                         SousCategorieDTO dto = updatedSousCategorie.toDTO();
                                                         dto.setBoutiqueId(personnelBoutique.getBoutique().getId());

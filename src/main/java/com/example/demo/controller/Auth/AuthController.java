@@ -88,16 +88,8 @@ package com.example.demo.controller.Auth;
                             if (authHeader != null && authHeader.startsWith("Bearer ")) {
                                 String jwtToken = authHeader.substring(7);
                                 try {
-                                    String username = jwtUtil.extractUsername(jwtToken);
-                                    UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-                                    UtilisateurInscrit utilisateurInscrit = authService.findByEmail(userDetails.getUsername());
-                                    if (utilisateurInscrit instanceof PersonnelBoutique) {
-                                        PersonnelBoutiqueDTO personnelBoutiqueDTO = convertToPersonnelBoutiqueDTO((PersonnelBoutique) utilisateurInscrit);
-                                        return ResponseEntity.ok(personnelBoutiqueDTO);
-                                    } else {
-                                        UtilisateurInscritDTO utilisateurInscritDTO = convertToDTO(utilisateurInscrit);
-                                        return ResponseEntity.ok(utilisateurInscritDTO);
-                                    }
+                                    UtilisateurInscritDTO utilisateurInscritDTO = authService.getUserInfo(jwtToken);
+                                    return ResponseEntity.ok(utilisateurInscritDTO);
                                 } catch (Exception e) {
                                     return ResponseEntity.badRequest().body("Invalid token");
                                 }
@@ -113,7 +105,6 @@ package com.example.demo.controller.Auth;
                             dto.setNom(personnelBoutique.getNom());
                             dto.setPrenom(personnelBoutique.getPrenom());
                             dto.setTelephone(personnelBoutique.getTelephone());
-                            dto.setDateInscription(personnelBoutique.getDateInscription());
                             dto.setRole(personnelBoutique.getRole());
                             dto.setAdresseLivraison(convertToDTO(personnelBoutique.getAdresseLivraison()));
                             dto.setBoutiqueId(personnelBoutique.getBoutique().getId());
@@ -144,7 +135,6 @@ package com.example.demo.controller.Auth;
                             dto.setNom(utilisateurInscrit.getNom());
                             dto.setPrenom(utilisateurInscrit.getPrenom());
                             dto.setTelephone(utilisateurInscrit.getTelephone());
-                            dto.setDateInscription(utilisateurInscrit.getDateInscription());
                             dto.setRole(utilisateurInscrit.getRole());
                             dto.setAdresseLivraison(convertToDTO(utilisateurInscrit.getAdresseLivraison()));
                             return dto;

@@ -29,7 +29,6 @@ package com.example.demo.service.Admin;
                                 utilisateurInscrit.setNom(utilisateurInscritDTO.getNom());
                                 utilisateurInscrit.setPrenom(utilisateurInscritDTO.getPrenom());
                                 utilisateurInscrit.setTelephone(utilisateurInscritDTO.getTelephone());
-                                utilisateurInscrit.setDateInscription(utilisateurInscritDTO.getDateInscription());
                                 utilisateurInscrit.setRole(utilisateurInscritDTO.getRole());
                                 utilisateurInscrit.setAdresseLivraison(utilisateurInscritDTO.getAdresseLivraison().toEntity());
 
@@ -47,7 +46,6 @@ package com.example.demo.service.Admin;
                                 utilisateurInscrit.setNom(utilisateurInscritDTO.getNom());
                                 utilisateurInscrit.setPrenom(utilisateurInscritDTO.getPrenom());
                                 utilisateurInscrit.setTelephone(utilisateurInscritDTO.getTelephone());
-                                utilisateurInscrit.setDateInscription(utilisateurInscritDTO.getDateInscription());
                                 utilisateurInscrit.setRole(utilisateurInscritDTO.getRole());
                                 utilisateurInscrit.setAdresseLivraison(utilisateurInscritDTO.getAdresseLivraison().toEntity());
 

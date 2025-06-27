@@ -83,6 +83,11 @@
                                     List<Boutique> boutiques = boutiqueRepository.searchByName(keyword);
                                     return boutiques.stream().map(Boutique::getDTO).collect(Collectors.toList());
                                 }
-
+                                @Override
+                                public int getFollowersCount(Long boutiqueId) {
+                                    Boutique boutique = boutiqueRepository.findById(boutiqueId)
+                                            .orElseThrow(() -> new IllegalArgumentException("Boutique not found with id: " + boutiqueId));
+                                    return followRepository.countByBoutique(boutique);
+                                }
 
                             }

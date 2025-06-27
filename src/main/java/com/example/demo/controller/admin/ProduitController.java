@@ -130,4 +130,5 @@
                             produitService.deleteProduit(id);
                             return ResponseEntity.noContent().build();
                         }
+
                     }

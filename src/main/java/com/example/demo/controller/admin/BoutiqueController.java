@@ -66,6 +66,7 @@ public class BoutiqueController {
             Files.createDirectories(uploadDir);
         }
         String filePath = uploadDir.resolve(file.getOriginalFilename()).toString();
+        System.out.println("File path: " + filePath);
         Files.write(Paths.get(filePath), file.getBytes());
         return filePath;
     }

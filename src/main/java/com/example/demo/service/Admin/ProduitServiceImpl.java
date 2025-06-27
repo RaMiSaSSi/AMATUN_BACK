@@ -52,19 +52,43 @@ package com.example.demo.service.Admin;
             public ProduitDTO updateProduit(Long produitId, ProduitDTO produitDTO) {
                 Produit produit = produitRepository.findById(produitId)
                         .orElseThrow(() -> new IllegalArgumentException("Produit not found with id: " + produitId));
-                produit.setNom(produitDTO.getNom());
-                /*produit.setImage(produitDTO.getImage());*/
-                produit.setImagePath(produitDTO.getImagePath());
-                produit.setDescription(produitDTO.getDescription());
-                produit.setPrix(produitDTO.getPrix());
-                produit.setQuantite(produitDTO.getQuantite());
-                produit.setPromo(produitDTO.isPromo());
-                produit.setPromotionPercentage(produitDTO.getPromotionPercentage());
-                produit.setDuree(produitDTO.getDuree());
-                produit.setStartDate(produitDTO.getStartDate());
-                produit.setBoutique(produitDTO.getBoutiqueId() != null ? boutiqueRepository.findById(produitDTO.getBoutiqueId()).orElse(null) : null);
-                produit.setCategorie(produitDTO.getCategorieId() != null ? categorieRepository.findById(produitDTO.getCategorieId()).orElse(null) : null);
-                produit.setSousCategorie(produitDTO.getSousCategorieId() != null ? sousCategorieRepository.findById(produitDTO.getSousCategorieId()).orElse(null) : null);
+
+                // Update only the fields that are provided
+                if (produitDTO.getNom() != null) {
+                    produit.setNom(produitDTO.getNom());
+                }
+                if (produitDTO.getImagePath() != null) {
+                    produit.setImagePath(produitDTO.getImagePath());
+                }
+                if (produitDTO.getDescription() != null) {
+                    produit.setDescription(produitDTO.getDescription());
+                }
+                if (produitDTO.getPrix() != 0) {
+                    produit.setPrix(produitDTO.getPrix());
+                }
+                if (produitDTO.getQuantite() != 0) {
+                    produit.setQuantite(produitDTO.getQuantite());
+                }
+                produit.setPromo(produitDTO.isPromo()); // Boolean fields can be directly updated
+                if (produitDTO.getPromotionPercentage() != 0.0) {
+                    produit.setPromotionPercentage(produitDTO.getPromotionPercentage());
+                }
+                if (produitDTO.getDuree() != 0.0) {
+                    produit.setDuree(produitDTO.getDuree());
+                }
+                if (produitDTO.getStartDate() != null) {
+                    produit.setStartDate(produitDTO.getStartDate());
+                }
+                if (produitDTO.getBoutiqueId() != null) {
+                    produit.setBoutique(boutiqueRepository.findById(produitDTO.getBoutiqueId()).orElse(null));
+                }
+                if (produitDTO.getCategorieId() != null) {
+                    produit.setCategorie(categorieRepository.findById(produitDTO.getCategorieId()).orElse(null));
+                }
+                if (produitDTO.getSousCategorieId() != null) {
+                    produit.setSousCategorie(sousCategorieRepository.findById(produitDTO.getSousCategorieId()).orElse(null));
+                }
+
                 Produit updatedProduit = produitRepository.save(produit);
                 return toDTO(updatedProduit);
             }
@@ -80,7 +104,6 @@ package com.example.demo.service.Admin;
                 ProduitDTO dto = new ProduitDTO();
                 dto.setId(produit.getId());
                 dto.setNom(produit.getNom());
-                /*dto.setImage(produit.getImage());*/
                 dto.setImagePath(produit.getImagePath());
                 dto.setDescription(produit.getDescription());
                 dto.setPrix(produit.getPrix());

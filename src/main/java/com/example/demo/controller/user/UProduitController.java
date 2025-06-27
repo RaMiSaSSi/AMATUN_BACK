@@ -76,4 +76,9 @@ public class UProduitController {
         List<ProduitDTO> popularProducts = produitService.getPopularProducts(limit);
         return ResponseEntity.ok(popularProducts);
     }
+    @GetMapping("/produits/count/{boutiqueId}")
+    public ResponseEntity<Integer> countProduitsByBoutiqueId(@PathVariable Long boutiqueId) {
+        int count = produitService.countProduitsByBoutiqueId(boutiqueId);
+        return ResponseEntity.ok(count);
+    }
 }

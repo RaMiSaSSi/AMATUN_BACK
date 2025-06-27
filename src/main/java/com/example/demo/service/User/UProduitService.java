@@ -1,4 +1,3 @@
-// File: src/main/java/com/example/demo/service/User/UProduitService.java
 package com.example.demo.service.User;
 
 import com.example.demo.dto.ProduitDTO;
@@ -16,4 +15,5 @@ Page<ProduitDTO> getProduitsByCategorieId(Long categorieId, Pageable pageable);
 Page<ProduitDTO> getProduitsBySousCategorieId(Long sousCategorieId, Pageable pageable);
 Page<ProduitDTO> getProduitsByBoutiqueId(Long boutiqueId, Pageable pageable);
     List<ProduitDTO> getPopularProducts(int limit);
+    int countProduitsByBoutiqueId(Long boutiqueId);
 }

@@ -6,6 +6,8 @@ package com.example.demo.service.Admin;
     import com.example.demo.model.Role;
     import com.example.demo.repository.BoutiqueRepository;
     import com.example.demo.repository.PersonnelBoutiqueRepository;
+    import com.example.demo.service.Auth.EmailService;
+    import jakarta.mail.MessagingException;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.security.crypto.password.PasswordEncoder;
     import org.springframework.stereotype.Service;
@@ -25,6 +27,8 @@ package com.example.demo.service.Admin;
 
         @Autowired
         private PasswordEncoder passwordEncoder;
+        @Autowired
+        private EmailService emailService;
 
         @Override
         public PersonnelBoutiqueDTO createPersonnelBoutiqueByAdmin(PersonnelBoutiqueDTO personnelBoutiqueDTO) {
@@ -35,13 +39,23 @@ package com.example.demo.service.Admin;
             personnelBoutique.setEmail(personnelBoutiqueDTO.getEmail());
             personnelBoutique.setMotDePasse(passwordEncoder.encode(personnelBoutiqueDTO.getMotDePasse()));
             personnelBoutique.setRole(Role.PERSONNEL_BOUTIQUE);
+            personnelBoutique.setFirstLogin(true);
             personnelBoutique.setBoutique(boutique);
             personnelBoutique.setUsername(personnelBoutiqueDTO.getUsername());
             personnelBoutique.setNom(personnelBoutiqueDTO.getNom());
             personnelBoutique.setPrenom(personnelBoutiqueDTO.getPrenom());
             personnelBoutique.setTelephone(personnelBoutiqueDTO.getTelephone());
-            personnelBoutique.setDateInscription(new Date());
             personnelBoutiqueRepository.save(personnelBoutique);
+
+            try {
+                emailService.sendPersonnelBoutiqueEmail(
+                        personnelBoutiqueDTO.getEmail(),
+                        personnelBoutiqueDTO.getUsername(),
+                        personnelBoutiqueDTO.getMotDePasse()
+                );
+            } catch (MessagingException e) {
+                throw new RuntimeException("Failed to send email", e);
+            }
 
             return personnelBoutiqueDTO;
         }

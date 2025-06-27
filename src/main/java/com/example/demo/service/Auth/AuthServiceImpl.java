@@ -47,7 +47,6 @@ public class AuthServiceImpl implements AuthService {
         }
         throw new IllegalArgumentException("Invalid email or password");
     }
-    // File: src/main/java/com/example/demo/service/Auth/AuthServiceImpl.java
     @Override
     public UtilisateurInscrit findByEmail(String email) {
         return utilisateurInscritRepository.findByEmail(email)
@@ -58,6 +57,7 @@ public class AuthServiceImpl implements AuthService {
         UtilisateurInscrit utilisateurInscrit = utilisateurInscritRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
         utilisateurInscrit.setMotDePasse(passwordEncoder.encode(newPassword));
+        utilisateurInscrit.setFirstLogin(false);
         utilisateurInscritRepository.save(utilisateurInscrit);
     }
     @Override
@@ -93,6 +93,8 @@ public class AuthServiceImpl implements AuthService {
         }
         return false;
     }
+
+
     @Override
     public boolean emailExists(String email) {
         return utilisateurInscritRepository.existsByEmail(email);
@@ -111,6 +113,13 @@ public class AuthServiceImpl implements AuthService {
         }
         return null;
     }
+    @Override
+    public UtilisateurInscritDTO getUserInfo(String jwtToken) {
+        String username = jwtUtil.extractUsername(jwtToken);
+        UtilisateurInscrit utilisateurInscrit = utilisateurInscritRepository.findByEmail(username)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        return convertToDTO(utilisateurInscrit);
+    }
     private UtilisateurInscritDTO convertToDTO(UtilisateurInscrit utilisateurInscrit) {
         UtilisateurInscritDTO dto = new UtilisateurInscritDTO();
         dto.setId(utilisateurInscrit.getId());
@@ -119,9 +128,9 @@ public class AuthServiceImpl implements AuthService {
         dto.setNom(utilisateurInscrit.getNom());
         dto.setPrenom(utilisateurInscrit.getPrenom());
         dto.setTelephone(utilisateurInscrit.getTelephone());
-        dto.setDateInscription(utilisateurInscrit.getDateInscription());
         dto.setRole(utilisateurInscrit.getRole());
         dto.setAdresseLivraison(convertToDTO(utilisateurInscrit.getAdresseLivraison()));
+        dto.setFirstLogin(utilisateurInscrit.isFirstLogin());
         return dto;
     }
 
@@ -133,7 +142,6 @@ public class AuthServiceImpl implements AuthService {
         utilisateurInscrit.setNom(dto.getNom());
         utilisateurInscrit.setPrenom(dto.getPrenom());
         utilisateurInscrit.setTelephone(dto.getTelephone());
-        utilisateurInscrit.setDateInscription(dto.getDateInscription());
         utilisateurInscrit.setRole(Role.valueOf(dto.getRole().name()));
         utilisateurInscrit.setAdresseLivraison(convertToEntity(dto.getAdresseLivraison()));
         return utilisateurInscrit;

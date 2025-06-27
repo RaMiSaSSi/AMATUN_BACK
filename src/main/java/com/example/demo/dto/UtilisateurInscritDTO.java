@@ -17,7 +17,7 @@ public class UtilisateurInscritDTO {
     private Date dateInscription;
     private Role role;
     private List<Long> followedBoutiqueIds; // Add this line
-
+    private boolean firstLogin = false;
     // Getters and Setters
 
     public long getId() {
@@ -98,5 +98,13 @@ public class UtilisateurInscritDTO {
 
     public void setFollowedBoutiqueIds(List<Long> followedBoutiqueIds) {
         this.followedBoutiqueIds = followedBoutiqueIds;
+    }
+
+    public boolean isFirstLogin() {
+        return firstLogin;
+    }
+
+    public void setFirstLogin(boolean firstLogin) {
+        this.firstLogin = firstLogin;
     }
 }
