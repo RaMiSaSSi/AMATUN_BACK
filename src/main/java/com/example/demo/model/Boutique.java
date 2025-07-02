@@ -40,6 +40,8 @@
         private Set<Follow> followers = new HashSet<>();
         private String imagePath;
         private String bannerPath;
+        @Column(name = "category_shop_id")
+        private Long categoryShopId;
         public long getId() {
             return id;
         }
@@ -144,6 +146,14 @@
             this.bannerPath = bannerPath;
         }
 
+        public Long getCategoryShopId() {
+            return categoryShopId;
+        }
+
+        public void setCategoryShopId(Long categoryShopId) {
+            this.categoryShopId = categoryShopId;
+        }
+
         public BoutiqueDTO getDTO() {
             BoutiqueDTO boutiqueDTO = new BoutiqueDTO();
             boutiqueDTO.setId(this.id);
@@ -159,6 +169,7 @@
             boutiqueDTO.setViews(this.views);
             boutiqueDTO.setImagePath(this.imagePath);
             boutiqueDTO.setBannerPath(this.bannerPath);
+            boutiqueDTO.setCategoryShopId(this.categoryShopId);
 
 
             return boutiqueDTO;

@@ -111,7 +111,11 @@ public CategorieDTO getCategorieById(long id) {
                 .orElseThrow(() -> new IllegalArgumentException("Categorie not found"));
         return convertToDTO(categorie);
     }
-
+    @Override
+    public List<CategorieDTO> getCategoriesByBoutiqueId(long boutiqueId) {
+        List<Categorie> categories = categorieRepository.findByBoutiqueCategories_Boutique_Id(boutiqueId);
+        return categories.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
     private CategorieDTO convertToDTO(Categorie categorie) {
         CategorieDTO dto = new CategorieDTO();
         dto.setId(categorie.getId());

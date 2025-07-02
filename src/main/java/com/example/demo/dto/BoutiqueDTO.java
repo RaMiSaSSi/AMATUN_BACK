@@ -21,9 +21,9 @@
             private Long adresseId;
             private List<Long> categorieIds;
             private int views;
-            private List<Long> followerIds;
             private String imagePath;
             private String bannerPath;
+            private Long categoryShopId;
 
             public long getId() {
                 return id;
@@ -97,14 +97,6 @@
                 this.views = views;
             }
 
-            public List<Long> getFollowerIds() {
-                return followerIds;
-            }
-
-            public void setFollowerIds(List<Long> followerIds) {
-                this.followerIds = followerIds;
-            }
-
             public String getImagePath() {
                 return imagePath;
             }
@@ -119,5 +111,13 @@
 
             public void setBannerPath(String bannerPath) {
                 this.bannerPath = bannerPath;
+            }
+
+            public Long getCategoryShopId() {
+                return categoryShopId;
+            }
+
+            public void setCategoryShopId(Long categoryShopId) {
+                this.categoryShopId = categoryShopId;
             }
         }

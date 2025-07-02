@@ -81,4 +81,31 @@ public class UProduitController {
         int count = produitService.countProduitsByBoutiqueId(boutiqueId);
         return ResponseEntity.ok(count);
     }
+    @GetMapping("/marques")
+    public ResponseEntity<List<String>> getAllMarques() {
+        List<String> marques = produitService.getAllMarques();
+        return ResponseEntity.ok(marques);
+    }
+    @GetMapping("/category-shop/{categoryShopId}")
+    public Page<ProduitDTO> getProduitsByCategoryShopId(
+            @PathVariable Long categoryShopId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return produitService.getProduitsByCategoryShopId(categoryShopId, pageable);
+    }
+    @GetMapping("/category-shop/{categoryShopId}/marques")
+    public ResponseEntity<List<String>> getMarquesByCategoryShopId(@PathVariable Long categoryShopId) {
+        List<String> marques = produitService.getMarquesByCategoryShopId(categoryShopId);
+        return ResponseEntity.ok(marques);
+    }
+    @GetMapping("/category-shop/{categoryShopId}/search")
+    public Page<ProduitDTO> searchProduitsByCategoryShopId(
+            @PathVariable Long categoryShopId,
+            @RequestParam String keyword,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return produitService.searchProduitsByCategoryShopId(categoryShopId, keyword, pageable);
+    }
 }

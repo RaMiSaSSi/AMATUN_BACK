@@ -45,6 +45,10 @@ public class Produit {
     @OneToMany(mappedBy = "produit", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CommandeProduit> commandeProduits;
 
+    private LocalDate dateDeCreation;
+    private String marque;
+    private int views;
+
     public Long getId() {
         return id;
     }
@@ -165,6 +169,30 @@ public class Produit {
         this.imagePath = imagePath;
     }
 
+    public LocalDate getDateDeCreation() {
+        return dateDeCreation;
+    }
+
+    public void setDateDeCreation(LocalDate dateDeCreation) {
+        this.dateDeCreation = dateDeCreation;
+    }
+
+    public String getMarque() {
+        return marque;
+    }
+
+    public void setMarque(String marque) {
+        this.marque = marque;
+    }
+
+    public int getViews() {
+        return views;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
+    }
+
     public ProduitDTO toDTO() {
         ProduitDTO dto = new ProduitDTO();
         dto.setId(this.id);
@@ -187,6 +215,9 @@ public class Produit {
         dto.setDuree(this.duree);
         dto.setStartDate(this.startDate);
         dto.setImagePath(this.imagePath);
+        dto.setViews(this.views);
+        dto.setDateDeCreation(this.dateDeCreation);
+        dto.setMarque(this.marque);
         return dto;
     }
 }

@@ -39,7 +39,7 @@ public class BoutiqueServiceImpl implements BoutiqueService {
         boutique.setNom(boutiqueDTO.getNom());
         boutique.setEmail(boutiqueDTO.getEmail());
         boutique.setTelephone(boutiqueDTO.getTelephone());
-
+        boutique.setCategoryShopId(boutiqueDTO.getCategoryShopId());
         if (boutiqueDTO.getImage() != null) {
             boutique.setImage(boutiqueDTO.getImage());
         }
@@ -81,7 +81,7 @@ public class BoutiqueServiceImpl implements BoutiqueService {
         boutique.setNom(boutiqueDTO.getNom());
         boutique.setEmail(boutiqueDTO.getEmail());
         boutique.setTelephone(boutiqueDTO.getTelephone());
-
+        boutique.setCategoryShopId(boutiqueDTO.getCategoryShopId());
         if (boutiqueDTO.getImagePath() != null) {
             boutique.setImagePath(boutiqueDTO.getImagePath());
         }

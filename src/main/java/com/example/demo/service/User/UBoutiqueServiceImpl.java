@@ -89,5 +89,13 @@
                                             .orElseThrow(() -> new IllegalArgumentException("Boutique not found with id: " + boutiqueId));
                                     return followRepository.countByBoutique(boutique);
                                 }
-
+                                @Override
+                                public List<BoutiqueDTO> getBoutiquesByCategoryShopId(Long categoryShopId) {
+                                    List<Boutique> boutiques = boutiqueRepository.findByCategoryShopId(categoryShopId);
+                                    return boutiques.stream().map(Boutique::getDTO).collect(Collectors.toList());
+                                }
+                                @Override
+                                public int getBoutiqueCountByCategoryShopId(Long categoryShopId) {
+                                    return boutiqueRepository.countByCategoryShopId(categoryShopId);
+                                }
                             }

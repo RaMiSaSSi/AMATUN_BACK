@@ -17,5 +17,5 @@ package com.example.demo.service.Admin;
         void addCategorieToBoutiques(long categorieId, Set<Long> boutiqueIds);
         CategorieDTO getCategorieWithBoutiques(long id);
         void addExistingCategorieToExistingBoutique(long categorieId, long boutiqueId);
-
+        List<CategorieDTO> getCategoriesByBoutiqueId(long boutiqueId);
     }

@@ -9,6 +9,7 @@ package com.example.demo.service.Admin;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.stereotype.Service;
 
+        import java.time.LocalDate;
         import java.util.List;
         import java.util.stream.Collectors;
 
@@ -44,6 +45,8 @@ package com.example.demo.service.Admin;
             public ProduitDTO createProduit(ProduitDTO produitDTO) {
                 Produit produit = toEntity(produitDTO);
                 produit.setImagePath(produitDTO.getImagePath());
+                produit.setDateDeCreation(LocalDate.now()); // Automatically set the current system date
+                produit.setViews(0); // Initialize views to 0
                 Produit savedProduit = produitRepository.save(produit);
                 return toDTO(savedProduit);
             }
@@ -88,6 +91,15 @@ package com.example.demo.service.Admin;
                 if (produitDTO.getSousCategorieId() != null) {
                     produit.setSousCategorie(sousCategorieRepository.findById(produitDTO.getSousCategorieId()).orElse(null));
                 }
+                if(produitDTO.getViews() != 0) {
+                    produit.setViews(produitDTO.getViews());
+                }
+                if(produitDTO.getDateDeCreation() != null) {
+                    produit.setDateDeCreation(produitDTO.getDateDeCreation());
+                }
+                if(produitDTO.getMarque() != null) {
+                    produit.setMarque(produitDTO.getMarque());
+                }
 
                 Produit updatedProduit = produitRepository.save(produit);
                 return toDTO(updatedProduit);
@@ -121,6 +133,9 @@ package com.example.demo.service.Admin;
                 if (produit.getBoutique() != null) {
                     dto.setBoutiqueId(produit.getBoutique().getId());
                 }
+                dto.setViews(produit.getViews());
+                dto.setDateDeCreation(produit.getDateDeCreation());
+                dto.setMarque(produit.getMarque());
                 return dto;
             }
 
@@ -139,6 +154,9 @@ package com.example.demo.service.Admin;
                 produit.setCategorie(dto.getCategorieId() != null ? categorieRepository.findById(dto.getCategorieId()).orElse(null) : null);
                 produit.setSousCategorie(dto.getSousCategorieId() != null ? sousCategorieRepository.findById(dto.getSousCategorieId()).orElse(null) : null);
                 produit.setBoutique(dto.getBoutiqueId() != null ? boutiqueRepository.findById(dto.getBoutiqueId()).orElse(null) : null);
+                produit.setViews(dto.getViews());
+                produit.setDateDeCreation(dto.getDateDeCreation());
+                produit.setMarque(dto.getMarque());
                 return produit;
             }
             

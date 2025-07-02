@@ -21,7 +21,9 @@ public class ProduitDTO {
     private int duree;
     private LocalDate startDate;
     private String imagePath;
-
+    private LocalDate dateDeCreation;
+    private String marque;
+    private int views;
 
     public Long getId() {
         return id;
@@ -133,5 +135,29 @@ public class ProduitDTO {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public LocalDate getDateDeCreation() {
+        return dateDeCreation;
+    }
+
+    public void setDateDeCreation(LocalDate dateDeCreation) {
+        this.dateDeCreation = dateDeCreation;
+    }
+
+    public String getMarque() {
+        return marque;
+    }
+
+    public void setMarque(String marque) {
+        this.marque = marque;
+    }
+
+    public int getViews() {
+        return views;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
     }
 }

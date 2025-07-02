@@ -25,7 +25,15 @@ public interface ProduitRepository extends JpaRepository<Produit, Long> {
     Page<Produit> findByCategorieId(Long categorieId, Pageable pageable);
     Page<Produit> findBySousCategorieId(Long sousCategorieId, Pageable pageable);
     Page<Produit> findByBoutiqueId(Long boutiqueId, Pageable pageable);
-    @Query("SELECT p FROM Produit p ORDER BY p.quantite DESC") // Example: Popular products based on quantity
+    @Query("SELECT p FROM Produit p ORDER BY p.views DESC")
     List<Produit> findPopularProducts(@Param("limit") int limit);
     int countByBoutiqueId(Long boutiqueId);
+    @Query("SELECT DISTINCT p.marque FROM Produit p WHERE p.marque IS NOT NULL")
+    List<String> findAllMarques();
+    @Query("SELECT p FROM Produit p WHERE p.boutique.categoryShopId = :categoryShopId")
+    Page<Produit> findByCategoryShopId(@Param("categoryShopId") Long categoryShopId, Pageable pageable);
+    @Query("SELECT DISTINCT p.marque FROM Produit p WHERE p.boutique.categoryShopId = :categoryShopId AND p.marque IS NOT NULL")
+    List<String> findMarquesByCategoryShopId(@Param("categoryShopId") Long categoryShopId);
+    @Query("SELECT p FROM Produit p WHERE p.boutique.categoryShopId = :categoryShopId AND LOWER(p.nom) LIKE LOWER(CONCAT('%', :keyword, '%'))")
+    Page<Produit> searchByCategoryShopId(@Param("categoryShopId") Long categoryShopId, @Param("keyword") String keyword, Pageable pageable);
 }

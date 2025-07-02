@@ -90,4 +90,9 @@ package com.example.demo.controller.admin;
             List<SousCategorieDTO> sousCategories = categorieService.getSousCategoriesByCategorieId(categorieId);
             return new ResponseEntity<>(sousCategories, HttpStatus.OK);
         }
+    @GetMapping("/boutique/{boutiqueId}")
+    public ResponseEntity<List<CategorieDTO>> getCategoriesByBoutiqueId(@PathVariable long boutiqueId) {
+        List<CategorieDTO> categories = categorieService.getCategoriesByBoutiqueId(boutiqueId);
+        return new ResponseEntity<>(categories, HttpStatus.OK);
+    }
     }

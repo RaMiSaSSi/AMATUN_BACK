@@ -16,4 +16,8 @@ Page<ProduitDTO> getProduitsBySousCategorieId(Long sousCategorieId, Pageable pag
 Page<ProduitDTO> getProduitsByBoutiqueId(Long boutiqueId, Pageable pageable);
     List<ProduitDTO> getPopularProducts(int limit);
     int countProduitsByBoutiqueId(Long boutiqueId);
+    List<String> getAllMarques();
+    Page<ProduitDTO> getProduitsByCategoryShopId(Long categoryShopId, Pageable pageable);
+    List<String> getMarquesByCategoryShopId(Long categoryShopId);
+    Page<ProduitDTO> searchProduitsByCategoryShopId(Long categoryShopId, String keyword, Pageable pageable);
 }

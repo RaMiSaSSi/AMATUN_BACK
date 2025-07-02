@@ -32,6 +32,7 @@ public class BoutiqueController {
             @RequestParam("telephone") String telephone,
             @RequestParam("email") String email,
             @RequestParam("adresseId") Long adresseId,
+            @RequestParam("categoryshopId") Long categoryShopId,
             @RequestParam(value = "categorieIds", required = false) List<Long> categorieIds,
             @RequestParam(value = "image", required = false) MultipartFile image,
             @RequestParam(value = "banner", required = false) MultipartFile banner) {
@@ -41,6 +42,7 @@ public class BoutiqueController {
             boutiqueDTO.setTelephone(telephone);
             boutiqueDTO.setEmail(email);
             boutiqueDTO.setAdresseId(adresseId);
+            boutiqueDTO.setCategoryShopId(categoryShopId);
             boutiqueDTO.setCategorieIds(categorieIds);
 
             if (image != null && !image.isEmpty()) {
@@ -78,6 +80,7 @@ public class BoutiqueController {
             @RequestParam("telephone") String telephone,
             @RequestParam("email") String email,
             @RequestParam("adresseId") Long adresseId,
+            @RequestParam("categoryshopId") Long categoryShopId,
             @RequestParam(value = "categorieIds", required = false) List<Long> categorieIds,
             @RequestParam(value = "image", required = false) MultipartFile image,
             @RequestParam(value = "banner", required = false) MultipartFile banner) {
@@ -87,6 +90,7 @@ public class BoutiqueController {
             boutiqueDTO.setTelephone(telephone);
             boutiqueDTO.setEmail(email);
             boutiqueDTO.setAdresseId(adresseId);
+            boutiqueDTO.setCategoryShopId(categoryShopId);
             boutiqueDTO.setCategorieIds(categorieIds);
 
             if (image != null && !image.isEmpty()) {

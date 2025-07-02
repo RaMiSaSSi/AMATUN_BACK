@@ -15,4 +15,8 @@ public interface BoutiqueRepository extends JpaRepository<Boutique, Long> {
 
     @Query("SELECT b FROM Boutique b WHERE LOWER(b.nom) LIKE LOWER(CONCAT('%', :keyword, '%'))")
     List<Boutique> searchByName(@Param("keyword") String keyword);
+
+    @Query("SELECT b FROM Boutique b WHERE b.categoryShopId = :categoryShopId")
+    List<Boutique> findByCategoryShopId(@Param("categoryShopId") Long categoryShopId);
+    int countByCategoryShopId(Long categoryShopId);
 }

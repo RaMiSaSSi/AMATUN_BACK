@@ -30,6 +30,11 @@ public class UProduitServiceImpl implements UProduitService {
     public ProduitDTO getProduitById(Long id) {
         Produit produit = produitRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Produit not found with id: " + id));
+
+        // Increment the number of views
+        produit.setViews(produit.getViews() + 1);
+        produitRepository.save(produit); // Save the updated product
+
         return produit.toDTO();
     }
    @Override
@@ -67,5 +72,23 @@ public class UProduitServiceImpl implements UProduitService {
     @Override
     public int countProduitsByBoutiqueId(Long boutiqueId) {
         return produitRepository.countByBoutiqueId(boutiqueId);
+    }
+    @Override
+    public List<String> getAllMarques() {
+        return produitRepository.findAllMarques();
+    }
+    @Override
+    public Page<ProduitDTO> getProduitsByCategoryShopId(Long categoryShopId, Pageable pageable) {
+        Page<Produit> produits = produitRepository.findByCategoryShopId(categoryShopId, pageable);
+        return produits.map(Produit::toDTO);
+    }
+    @Override
+    public List<String> getMarquesByCategoryShopId(Long categoryShopId) {
+        return produitRepository.findMarquesByCategoryShopId(categoryShopId);
+    }
+    @Override
+    public Page<ProduitDTO> searchProduitsByCategoryShopId(Long categoryShopId, String keyword, Pageable pageable) {
+        Page<Produit> produits = produitRepository.searchByCategoryShopId(categoryShopId, keyword, pageable);
+        return produits.map(Produit::toDTO);
     }
 }

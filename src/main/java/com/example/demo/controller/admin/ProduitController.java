@@ -40,13 +40,14 @@
                                 @RequestParam String description,
                                 @RequestParam double prix,
                                 @RequestParam int quantite,
-                                @RequestParam(required = false) Boolean promo, // Use Boolean instead of boolean
-                                @RequestParam(required = false) Double promotionPercentage, // Use Double instead of double
-                                @RequestParam(required = false) Integer duree, // Use Integer instead of int
+                                @RequestParam(required = false) Boolean promo,
+                                @RequestParam(required = false) Double promotionPercentage,
+                                @RequestParam(required = false) Integer duree,
                                 @RequestParam(required = false) LocalDate startDate,
                                 @RequestParam Long boutiqueId,
                                 @RequestParam(required = false) Long categorieId,
                                 @RequestParam(required = false) Long sousCategorieId,
+                                @RequestParam String marque, // Add marque parameter
                                 @RequestParam("image") MultipartFile image) throws IOException {
 
                             byte[] imageBytes = image.getBytes();
@@ -56,14 +57,14 @@
                             produitDTO.setDescription(description);
                             produitDTO.setPrix(prix);
                             produitDTO.setQuantite(quantite);
-                            produitDTO.setPromo(promo != null ? promo : false); // Default to false if null
-                            produitDTO.setPromotionPercentage(promotionPercentage != null ? promotionPercentage : 0.0); // Default to 0.0 if null
-                            produitDTO.setDuree(duree != null ? duree : 0); // Default to 0 if null
+                            produitDTO.setPromo(promo != null ? promo : false);
+                            produitDTO.setPromotionPercentage(promotionPercentage != null ? promotionPercentage : 0.0);
+                            produitDTO.setDuree(duree != null ? duree : 0);
                             produitDTO.setStartDate(startDate);
                             produitDTO.setBoutiqueId(boutiqueId);
                             produitDTO.setCategorieId(categorieId);
                             produitDTO.setSousCategorieId(sousCategorieId);
-                            /*produitDTO.setImage(imageBytes);*/
+                            produitDTO.setMarque(marque); // Set marque
                             if (image != null) {
                                 String imagePath = saveFile(image, "uploads/produits");
                                 produitDTO.setImagePath(imagePath);
@@ -80,21 +81,17 @@
                                 @RequestParam String description,
                                 @RequestParam double prix,
                                 @RequestParam int quantite,
-                                @RequestParam (required = false)boolean promo,
-                                @RequestParam (required = false)double promotionPercentage,
-                                @RequestParam (required = false)int duree,
-                                @RequestParam (required = false)LocalDate startDate,
+                                @RequestParam(required = false) boolean promo,
+                                @RequestParam(required = false) double promotionPercentage,
+                                @RequestParam(required = false) int duree,
+                                @RequestParam(required = false) LocalDate startDate,
                                 @RequestParam Long boutiqueId,
                                 @RequestParam(required = false) Long categorieId,
                                 @RequestParam(required = false) Long sousCategorieId,
+                                @RequestParam String marque, // Add marque parameter
                                 @RequestParam(value = "image", required = false) MultipartFile image) throws IOException {
 
                             ProduitDTO existingProduit = produitService.getProduitById(produitId);
-
-                            /*byte[] imageBytes = existingProduit.getImage();
-                            if (image != null) {
-                                imageBytes = image.getBytes();
-                            }*/
 
                             ProduitDTO produitDTO = new ProduitDTO();
                             produitDTO.setNom(nom);
@@ -108,11 +105,15 @@
                             produitDTO.setBoutiqueId(boutiqueId);
                             produitDTO.setCategorieId(categorieId);
                             produitDTO.setSousCategorieId(sousCategorieId);
-                            /*produitDTO.setImage(imageBytes);*/
+                            produitDTO.setMarque(marque); // Set marque
+                            produitDTO.setDateDeCreation(existingProduit.getDateDeCreation()); // Preserve original creation date
+                            produitDTO.setViews(existingProduit.getViews()); // Preserve original views count
+
                             if (image != null) {
                                 String imagePath = saveFile(image, "uploads/produits");
                                 produitDTO.setImagePath(imagePath);
                             }
+
                             ProduitDTO updatedProduit = produitService.updateProduit(produitId, produitDTO);
                             return ResponseEntity.ok(updatedProduit);
                         }
@@ -130,5 +131,6 @@
                             produitService.deleteProduit(id);
                             return ResponseEntity.noContent().build();
                         }
+
 
                     }

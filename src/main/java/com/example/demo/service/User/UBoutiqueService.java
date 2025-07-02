@@ -14,4 +14,6 @@ public interface UBoutiqueService {
     void unfollowBoutique(Long utilisateurId, Long boutiqueId); // New method
     List<BoutiqueDTO> searchBoutiques(String keyword); // New method
     int getFollowersCount(Long boutiqueId);
+    List<BoutiqueDTO> getBoutiquesByCategoryShopId(Long categoryShopId); // New method
+    int getBoutiqueCountByCategoryShopId(Long categoryShopId);
 }

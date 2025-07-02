@@ -53,5 +53,15 @@ public class UBoutiqueController {
         int count = uBoutiqueService.getFollowersCount(id);
         return ResponseEntity.ok(count);
     }
+    @GetMapping("/category-shop/{categoryShopId}")
+    public ResponseEntity<List<BoutiqueDTO>> getBoutiquesByCategoryShopId(@PathVariable Long categoryShopId) {
+        List<BoutiqueDTO> boutiques = uBoutiqueService.getBoutiquesByCategoryShopId(categoryShopId);
+        return ResponseEntity.ok(boutiques);
+    }
+    @GetMapping("/{categoryShopId}/boutique-count")
+    public ResponseEntity<Integer> getBoutiqueCountByCategoryShopId(@PathVariable Long categoryShopId) {
+        int count = uBoutiqueService.getBoutiqueCountByCategoryShopId(categoryShopId);
+        return ResponseEntity.ok(count);
+    }
 
 }
