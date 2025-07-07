@@ -20,4 +20,5 @@ Page<ProduitDTO> getProduitsByBoutiqueId(Long boutiqueId, Pageable pageable);
     Page<ProduitDTO> getProduitsByCategoryShopId(Long categoryShopId, Pageable pageable);
     List<String> getMarquesByCategoryShopId(Long categoryShopId);
     Page<ProduitDTO> searchProduitsByCategoryShopId(Long categoryShopId, String keyword, Pageable pageable);
+    List<ProduitDTO> searchProduitsInBoutique(Long boutiqueId, String keyword);
 }

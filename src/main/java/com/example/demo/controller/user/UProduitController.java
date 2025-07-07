@@ -108,4 +108,11 @@ public class UProduitController {
         Pageable pageable = PageRequest.of(page, size);
         return produitService.searchProduitsByCategoryShopId(categoryShopId, keyword, pageable);
     }
+    @GetMapping("/boutique/{boutiqueId}/search")
+    public ResponseEntity<List<ProduitDTO>> searchProduitsInBoutique(
+            @PathVariable Long boutiqueId,
+            @RequestParam String keyword) {
+        List<ProduitDTO> produits = produitService.searchProduitsInBoutique(boutiqueId, keyword);
+        return ResponseEntity.ok(produits);
+    }
 }

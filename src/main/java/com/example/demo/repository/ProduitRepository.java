@@ -36,4 +36,6 @@ public interface ProduitRepository extends JpaRepository<Produit, Long> {
     List<String> findMarquesByCategoryShopId(@Param("categoryShopId") Long categoryShopId);
     @Query("SELECT p FROM Produit p WHERE p.boutique.categoryShopId = :categoryShopId AND LOWER(p.nom) LIKE LOWER(CONCAT('%', :keyword, '%'))")
     Page<Produit> searchByCategoryShopId(@Param("categoryShopId") Long categoryShopId, @Param("keyword") String keyword, Pageable pageable);
+    @Query("SELECT p FROM Produit p WHERE p.boutique.id = :boutiqueId AND LOWER(p.nom) LIKE LOWER(CONCAT('%', :keyword, '%'))")
+    List<Produit> searchByBoutiqueIdAndName(@Param("boutiqueId") Long boutiqueId, @Param("keyword") String keyword);
 }

@@ -91,4 +91,9 @@ public class UProduitServiceImpl implements UProduitService {
         Page<Produit> produits = produitRepository.searchByCategoryShopId(categoryShopId, keyword, pageable);
         return produits.map(Produit::toDTO);
     }
+    @Override
+    public List<ProduitDTO> searchProduitsInBoutique(Long boutiqueId, String keyword) {
+        List<Produit> produits = produitRepository.searchByBoutiqueIdAndName(boutiqueId, keyword);
+        return produits.stream().map(Produit::toDTO).collect(Collectors.toList());
+    }
 }
