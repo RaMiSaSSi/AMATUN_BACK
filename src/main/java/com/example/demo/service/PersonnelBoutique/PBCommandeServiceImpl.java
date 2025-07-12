@@ -88,12 +88,21 @@
             Commande commande = commandeRepository.findById(id)
                     .orElseThrow(() -> new IllegalArgumentException("Commande not found"));
 
+            // Update the status of the command
             commande.setStatut(statut);
 
+            // If the status is changed to CONFIRMED, reduce the product quantities
             if (statut == Statut.CONFIRMED) {
                 commande.getProduits().forEach(produitCommande -> {
                     Produit produit = produitCommande.getProduit();
-                    produit.setQuantite(produit.getQuantite() - produitCommande.getQuantite());
+                    int newQuantity = produit.getQuantite() - produitCommande.getQuantite();
+
+                    // Ensure the quantity does not go below zero
+                    if (newQuantity < 0) {
+                        throw new IllegalArgumentException("Insufficient stock for product: " + produit.getNom());
+                    }
+
+                    produit.setQuantite(newQuantity);
                     produitRepository.save(produit);
                 });
             }

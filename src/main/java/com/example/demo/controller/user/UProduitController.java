@@ -115,4 +115,23 @@ public class UProduitController {
         List<ProduitDTO> produits = produitService.searchProduitsInBoutique(boutiqueId, keyword);
         return ResponseEntity.ok(produits);
     }
+    @GetMapping("/new")
+    public ResponseEntity<Page<ProduitDTO>> getNewProducts(Pageable pageable) {
+        Page<ProduitDTO> newProducts = produitService.getNewProducts(pageable);
+        return ResponseEntity.ok(newProducts);
+    }
+    @GetMapping("/trending")
+    public ResponseEntity<Page<ProduitDTO>> getTrendingProducts(Pageable pageable) {
+        Page<ProduitDTO> trendingProducts = produitService.getTrendingProducts(pageable);
+        return ResponseEntity.ok(trendingProducts);
+    }
+    @GetMapping("/promotions")
+    public ResponseEntity<Page<ProduitDTO>> getPromotionalProducts(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<ProduitDTO> produits = produitService.getPromotionalProducts(pageable);
+        return ResponseEntity.ok(produits);
+    }
+
 }

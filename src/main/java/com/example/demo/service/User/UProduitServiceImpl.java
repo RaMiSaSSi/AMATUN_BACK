@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -95,5 +96,22 @@ public class UProduitServiceImpl implements UProduitService {
     public List<ProduitDTO> searchProduitsInBoutique(Long boutiqueId, String keyword) {
         List<Produit> produits = produitRepository.searchByBoutiqueIdAndName(boutiqueId, keyword);
         return produits.stream().map(Produit::toDTO).collect(Collectors.toList());
+    }
+    // Java
+    @Override
+    public Page<ProduitDTO> getNewProducts(Pageable pageable) {
+        LocalDate fourDaysAgo = LocalDate.now().minusDays(4);
+        Page<Produit> produits = produitRepository.findNewProducts(fourDaysAgo, pageable);
+        return produits.map(Produit::toDTO);
+    }
+    @Override
+    public Page<ProduitDTO> getTrendingProducts(Pageable pageable) {
+        Page<Produit> produits = produitRepository.findTrendingProducts(pageable);
+        return produits.map(Produit::toDTO);
+    }
+    @Override
+    public Page<ProduitDTO> getPromotionalProducts(Pageable pageable) {
+        Page<Produit> produits = produitRepository.findPromotionalProducts(pageable);
+        return produits.map(Produit::toDTO);
     }
 }

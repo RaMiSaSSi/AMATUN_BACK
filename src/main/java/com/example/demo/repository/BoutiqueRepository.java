@@ -1,5 +1,6 @@
 package com.example.demo.repository;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import com.example.demo.model.Boutique;
 import com.example.demo.model.Categorie;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,4 +20,10 @@ public interface BoutiqueRepository extends JpaRepository<Boutique, Long> {
     @Query("SELECT b FROM Boutique b WHERE b.categoryShopId = :categoryShopId")
     List<Boutique> findByCategoryShopId(@Param("categoryShopId") Long categoryShopId);
     int countByCategoryShopId(Long categoryShopId);
+    //
+    @Query("SELECT b FROM Boutique b ORDER BY SIZE(b.followers) DESC")
+    Page<Boutique> findBoutiquesWithMostFollowers(Pageable pageable);
+    //
+    @Query("SELECT COUNT(p) FROM Produit p WHERE p.boutique.id = :boutiqueId")
+    int countProductsByBoutiqueId(@Param("boutiqueId") Long boutiqueId);
 }

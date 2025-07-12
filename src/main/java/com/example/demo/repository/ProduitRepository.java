@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import java.time.LocalDate;
 
 import java.util.List;
 
@@ -38,4 +39,11 @@ public interface ProduitRepository extends JpaRepository<Produit, Long> {
     Page<Produit> searchByCategoryShopId(@Param("categoryShopId") Long categoryShopId, @Param("keyword") String keyword, Pageable pageable);
     @Query("SELECT p FROM Produit p WHERE p.boutique.id = :boutiqueId AND LOWER(p.nom) LIKE LOWER(CONCAT('%', :keyword, '%'))")
     List<Produit> searchByBoutiqueIdAndName(@Param("boutiqueId") Long boutiqueId, @Param("keyword") String keyword);
+    @Query("SELECT p FROM Produit p WHERE p.dateDeCreation >= :startDate")
+    Page<Produit> findNewProducts(LocalDate startDate, Pageable pageable);
+    @Query("SELECT p FROM Produit p ORDER BY p.views DESC")
+    Page<Produit> findTrendingProducts(Pageable pageable);
+    // Java
+    @Query("SELECT p FROM Produit p WHERE p.promo = true")
+    Page<Produit> findPromotionalProducts(Pageable pageable);
 }

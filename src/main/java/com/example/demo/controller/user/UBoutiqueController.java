@@ -1,6 +1,7 @@
 // File: src/main/java/com/example/demo/controller/User/UBoutiqueController.java
 package com.example.demo.controller.user;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import com.example.demo.dto.AdresseDTO;
 import com.example.demo.dto.BoutiqueDTO;
 import com.example.demo.service.User.UBoutiqueService;
@@ -63,5 +64,20 @@ public class UBoutiqueController {
         int count = uBoutiqueService.getBoutiqueCountByCategoryShopId(categoryShopId);
         return ResponseEntity.ok(count);
     }
-
+    @GetMapping("/most-followed")
+    public ResponseEntity<Page<BoutiqueDTO>> getBoutiquesWithMostFollowers(Pageable pageable) {
+        Page<BoutiqueDTO> mostFollowedBoutiques = uBoutiqueService.getBoutiquesWithMostFollowers(pageable);
+        return ResponseEntity.ok(mostFollowedBoutiques);
+    }
+    // Java
+    @GetMapping("/{boutiqueId}/products/count")
+    public ResponseEntity<Integer> getProductCountByBoutiqueId(@PathVariable Long boutiqueId) {
+        int count = uBoutiqueService.getProductCountByBoutiqueId(boutiqueId);
+        return ResponseEntity.ok(count);
+    }
+    @GetMapping("/{boutiqueId}/is-followed")
+    public ResponseEntity<Boolean> isBoutiqueFollowed(@PathVariable Long boutiqueId, @RequestParam Long utilisateurId) {
+        boolean isFollowed = uBoutiqueService.isBoutiqueFollowed(utilisateurId, boutiqueId);
+        return ResponseEntity.ok(isFollowed);
+    }
 }

@@ -1,6 +1,7 @@
 // File: src/main/java/com/example/demo/service/User/UBoutiqueServiceImpl.java
                             package com.example.demo.service.User;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
                             import com.example.demo.dto.AdresseDTO;
                             import com.example.demo.dto.BoutiqueDTO;
                             import com.example.demo.model.Boutique;
@@ -97,5 +98,23 @@
                                 @Override
                                 public int getBoutiqueCountByCategoryShopId(Long categoryShopId) {
                                     return boutiqueRepository.countByCategoryShopId(categoryShopId);
+                                }
+                                @Override
+                                public Page<BoutiqueDTO> getBoutiquesWithMostFollowers(Pageable pageable) {
+                                    Page<Boutique> boutiques = boutiqueRepository.findBoutiquesWithMostFollowers(pageable);
+                                    return boutiques.map(Boutique::getDTO);
+                                }
+                                // Java
+                                @Override
+                                public int getProductCountByBoutiqueId(Long boutiqueId) {
+                                    return boutiqueRepository.countProductsByBoutiqueId(boutiqueId);
+                                }
+                                @Override
+                                public boolean isBoutiqueFollowed(Long utilisateurId, Long boutiqueId) {
+                                    UtilisateurInscrit utilisateur = utilisateurInscritRepository.findById(utilisateurId)
+                                            .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + utilisateurId));
+                                    Boutique boutique = boutiqueRepository.findById(boutiqueId)
+                                            .orElseThrow(() -> new IllegalArgumentException("Boutique not found with id: " + boutiqueId));
+                                    return followRepository.existsByUtilisateurAndBoutique(utilisateur, boutique);
                                 }
                             }

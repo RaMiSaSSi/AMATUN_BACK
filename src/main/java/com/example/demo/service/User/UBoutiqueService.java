@@ -3,6 +3,8 @@ package com.example.demo.service.User;
 
 import com.example.demo.dto.AdresseDTO;
 import com.example.demo.dto.BoutiqueDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -16,4 +18,7 @@ public interface UBoutiqueService {
     int getFollowersCount(Long boutiqueId);
     List<BoutiqueDTO> getBoutiquesByCategoryShopId(Long categoryShopId); // New method
     int getBoutiqueCountByCategoryShopId(Long categoryShopId);
+    Page<BoutiqueDTO> getBoutiquesWithMostFollowers(Pageable pageable);
+    int getProductCountByBoutiqueId(Long boutiqueId);
+    boolean isBoutiqueFollowed(Long utilisateurId, Long boutiqueId);
 }

@@ -1,5 +1,7 @@
 package com.example.demo.controller.user;
 
+import com.example.demo.dto.CategorieDTO;
+import com.example.demo.model.Categorie;
 import com.example.demo.model.CategoryShop;
 import com.example.demo.service.User.UCategoryShopService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +26,10 @@ public class UCategoryShop {
     @GetMapping("/{id}")
     public ResponseEntity<CategoryShop> getCategoryShopById(@PathVariable Long id) {
         return ResponseEntity.ok(categoryShopService.getCategoryShopById(id));
+    }
+    @GetMapping("/{categoryShopId}/categories")
+    public ResponseEntity<List<CategorieDTO>> getCategoriesByCategoryShopId(@PathVariable Long categoryShopId) {
+        List<CategorieDTO> categories = categoryShopService.getCategoriesByCategoryShopId(categoryShopId);
+        return ResponseEntity.ok(categories);
     }
 }
