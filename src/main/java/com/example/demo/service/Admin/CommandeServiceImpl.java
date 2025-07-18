@@ -7,6 +7,8 @@ package com.example.demo.service.Admin;
                         import com.example.demo.repository.ProduitRepository;
                         import com.example.demo.repository.UtilisateurInscritRepository;
                         import org.springframework.beans.factory.annotation.Autowired;
+                        import org.springframework.data.domain.Page;
+                        import org.springframework.data.domain.Pageable;
                         import org.springframework.stereotype.Service;
 
                         import java.util.List;
@@ -152,5 +154,10 @@ package com.example.demo.service.Admin;
                                 commandeRepository.save(commande);
 
                                 return commande.toDTO();
+                            }
+                            @Override
+                            public Page<CommandeDTO> getAllCommandesPaggination(Pageable pageable) {
+                                return commandeRepository.findAll(pageable)
+                                        .map(Commande::toDTO);
                             }
                         }

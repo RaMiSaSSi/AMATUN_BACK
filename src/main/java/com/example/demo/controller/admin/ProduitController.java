@@ -4,6 +4,9 @@
                     import com.example.demo.dto.ProduitDTO;
                     import com.example.demo.service.Admin.ProduitService;
                     import org.springframework.beans.factory.annotation.Autowired;
+                    import org.springframework.data.domain.Page;
+                    import org.springframework.data.domain.Pageable;
+                    import org.springframework.data.web.PageableDefault;
                     import org.springframework.http.ResponseEntity;
                     import org.springframework.web.bind.annotation.*;
                     import org.springframework.web.multipart.MultipartFile;
@@ -29,11 +32,11 @@
                         }
 
                         @GetMapping
-                        public ResponseEntity<List<ProduitDTO>> getAllProduits() {
-                            List<ProduitDTO> produits = produitService.getAllProduits();
+                        public ResponseEntity<Page<ProduitDTO>> getAllProduits(
+                                @PageableDefault(size = 10) Pageable pageable) {
+                            Page<ProduitDTO> produits = produitService.getAllProduits(pageable);
                             return ResponseEntity.ok(produits);
                         }
-
                         @PostMapping(consumes = "multipart/form-data")
                         public ResponseEntity<ProduitDTO> createProduit(
                                 @RequestParam String nom,

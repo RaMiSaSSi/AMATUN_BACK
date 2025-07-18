@@ -5,6 +5,9 @@ package com.example.demo.controller.admin;
     import com.example.demo.model.Categorie;
     import com.example.demo.service.Admin.CategorieService;
     import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.data.domain.Page;
+    import org.springframework.data.domain.PageRequest;
+    import org.springframework.data.domain.Pageable;
     import org.springframework.http.HttpStatus;
     import org.springframework.http.ResponseEntity;
     import org.springframework.web.bind.annotation.*;
@@ -93,6 +96,14 @@ package com.example.demo.controller.admin;
     @GetMapping("/boutique/{boutiqueId}")
     public ResponseEntity<List<CategorieDTO>> getCategoriesByBoutiqueId(@PathVariable long boutiqueId) {
         List<CategorieDTO> categories = categorieService.getCategoriesByBoutiqueId(boutiqueId);
+        return new ResponseEntity<>(categories, HttpStatus.OK);
+    }
+    @GetMapping("/pagination")
+    public ResponseEntity<Page<CategorieDTO>> getAllCategoriesPagination(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "6") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<CategorieDTO> categories = categorieService.getAllCategoriesPagination(pageable);
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }
     }

@@ -11,6 +11,8 @@ import com.example.demo.repository.BoutiqueRepository;
 import com.example.demo.repository.CategorieRepository;
 import com.example.demo.repository.SousCategorieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -115,6 +117,11 @@ public CategorieDTO getCategorieById(long id) {
     public List<CategorieDTO> getCategoriesByBoutiqueId(long boutiqueId) {
         List<Categorie> categories = categorieRepository.findByBoutiqueCategories_Boutique_Id(boutiqueId);
         return categories.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
+    @Override
+    public Page<CategorieDTO> getAllCategoriesPagination(Pageable pageable) {
+        return categorieRepository.findAll(pageable)
+                .map(this::convertToDTO);
     }
     private CategorieDTO convertToDTO(Categorie categorie) {
         CategorieDTO dto = new CategorieDTO();

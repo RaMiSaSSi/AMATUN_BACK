@@ -7,6 +7,8 @@ package com.example.demo.service.Admin;
         import com.example.demo.repository.SousCategorieRepository;
         import com.example.demo.repository.BoutiqueRepository;
         import org.springframework.beans.factory.annotation.Autowired;
+        import org.springframework.data.domain.Page;
+        import org.springframework.data.domain.Pageable;
         import org.springframework.stereotype.Service;
 
         import java.time.LocalDate;
@@ -35,10 +37,9 @@ package com.example.demo.service.Admin;
             }
 
             @Override
-            public List<ProduitDTO> getAllProduits() {
-                return produitRepository.findAll().stream()
-                        .map(this::toDTO)
-                        .collect(Collectors.toList());
+            public Page<ProduitDTO> getAllProduits(Pageable pageable) {
+                return produitRepository.findAll(pageable)
+                        .map(this::toDTO);
             }
 
             @Override

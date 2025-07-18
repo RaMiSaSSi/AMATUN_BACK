@@ -4,6 +4,9 @@ import com.example.demo.dto.CommandeDTO;
 import com.example.demo.model.Statut;
 import com.example.demo.service.Admin.CommandeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,5 +44,13 @@ public class CommandeController {
     public ResponseEntity<CommandeDTO> changeStatut(@PathVariable Long id, @RequestBody Statut statut) {
         CommandeDTO updatedCommande = commandeService.changeStatut(id, statut);
         return ResponseEntity.ok(updatedCommande);
+    }
+    @GetMapping("/pagination")
+    public ResponseEntity<Page<CommandeDTO>> getAllCommandesPagination(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "6") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<CommandeDTO> commandes = commandeService.getAllCommandesPaggination(pageable);
+        return ResponseEntity.ok(commandes);
     }
 }

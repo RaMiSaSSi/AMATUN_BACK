@@ -4,6 +4,8 @@ package com.example.demo.service.Admin;
 
 import com.example.demo.dto.CommandeDTO;
 import com.example.demo.model.Statut;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -13,5 +15,5 @@ public interface CommandeService {
     List<CommandeDTO> getAllCommandes();
     CommandeDTO updateCommande(Long id, CommandeDTO commandeDTO); // New method
     CommandeDTO changeStatut(Long id, Statut statut); // New method
-
+    Page<CommandeDTO> getAllCommandesPaggination(Pageable pageable);
 }

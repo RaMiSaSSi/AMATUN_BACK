@@ -12,6 +12,8 @@ import com.example.demo.repository.BoutiqueCategorieRepository;
 import com.example.demo.repository.BoutiqueRepository;
 import com.example.demo.repository.CategorieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -121,13 +123,14 @@ public class BoutiqueServiceImpl implements BoutiqueService {
     }
 
     @Override
-    public List<BoutiqueDTO> getAllBoutiques() {
-        return boutiqueRepository.findAll().stream().map(boutique -> {
-            BoutiqueDTO boutiqueDTO = boutique.getDTO();
-            boutiqueDTO.setImagePath(boutique.getImagePath());
-            boutiqueDTO.setBannerPath(boutique.getBannerPath());
-            return boutiqueDTO;
-        }).collect(Collectors.toList());
+    public Page<BoutiqueDTO> getAllBoutiques(Pageable pageable) {
+        return boutiqueRepository.findAll(pageable)
+                .map(boutique -> {
+                    BoutiqueDTO boutiqueDTO = boutique.getDTO();
+                    boutiqueDTO.setImagePath(boutique.getImagePath());
+                    boutiqueDTO.setBannerPath(boutique.getBannerPath());
+                    return boutiqueDTO;
+                });
     }
     @Override
     public List<CategorieDTO> getCategoriesByBoutiqueId(long boutiqueId) {

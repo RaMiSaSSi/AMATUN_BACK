@@ -117,4 +117,9 @@ import org.springframework.data.domain.Pageable;
                                             .orElseThrow(() -> new IllegalArgumentException("Boutique not found with id: " + boutiqueId));
                                     return followRepository.existsByUtilisateurAndBoutique(utilisateur, boutique);
                                 }
+                                @Override
+                                public List<BoutiqueDTO> getBoutiquesWithPromotionalProducts() {
+                                    List<Boutique> boutiques = boutiqueRepository.findBoutiquesWithPromotionalProducts();
+                                    return boutiques.stream().map(Boutique::getDTO).collect(Collectors.toList());
+                                }
                             }

@@ -26,4 +26,7 @@ public interface BoutiqueRepository extends JpaRepository<Boutique, Long> {
     //
     @Query("SELECT COUNT(p) FROM Produit p WHERE p.boutique.id = :boutiqueId")
     int countProductsByBoutiqueId(@Param("boutiqueId") Long boutiqueId);
+
+    @Query("SELECT DISTINCT p.boutique FROM Produit p WHERE p.promo = true")
+    List<Boutique> findBoutiquesWithPromotionalProducts();
 }

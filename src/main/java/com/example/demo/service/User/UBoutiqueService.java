@@ -21,4 +21,5 @@ public interface UBoutiqueService {
     Page<BoutiqueDTO> getBoutiquesWithMostFollowers(Pageable pageable);
     int getProductCountByBoutiqueId(Long boutiqueId);
     boolean isBoutiqueFollowed(Long utilisateurId, Long boutiqueId);
+    List<BoutiqueDTO> getBoutiquesWithPromotionalProducts();
 }

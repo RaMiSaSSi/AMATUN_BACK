@@ -121,7 +121,10 @@ public class UProduitController {
         return ResponseEntity.ok(newProducts);
     }
     @GetMapping("/trending")
-    public ResponseEntity<Page<ProduitDTO>> getTrendingProducts(Pageable pageable) {
+    public ResponseEntity<Page<ProduitDTO>> getTrendingProducts(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
         Page<ProduitDTO> trendingProducts = produitService.getTrendingProducts(pageable);
         return ResponseEntity.ok(trendingProducts);
     }

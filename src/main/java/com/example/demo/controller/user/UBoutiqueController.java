@@ -80,4 +80,9 @@ public class UBoutiqueController {
         boolean isFollowed = uBoutiqueService.isBoutiqueFollowed(utilisateurId, boutiqueId);
         return ResponseEntity.ok(isFollowed);
     }
+    @GetMapping("/with-promotions")
+    public ResponseEntity<List<BoutiqueDTO>> getBoutiquesWithPromotionalProducts() {
+        List<BoutiqueDTO> boutiques = uBoutiqueService.getBoutiquesWithPromotionalProducts();
+        return ResponseEntity.ok(boutiques);
+    }
 }
