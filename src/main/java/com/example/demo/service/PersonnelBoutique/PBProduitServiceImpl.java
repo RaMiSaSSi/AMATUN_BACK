@@ -113,6 +113,7 @@
                 ProduitDTO dto = new ProduitDTO();
                 dto.setId(produit.getId());
                 dto.setNom(produit.getNom());
+                dto.setImagePath(produit.getImagePath());
                 /*dto.setImage(produit.getImage());*/
                 dto.setDescription(produit.getDescription());
                 dto.setPrix(produit.getPrix());
@@ -121,6 +122,7 @@
                 dto.setDuree(produit.getDuree());
                 dto.setStartDate(produit.getStartDate());
                 dto.setPromo(produit.isPromo());
+                dto.setMarque(produit.getMarque());
                 dto.setCategorieId(produit.getCategorie() != null ? produit.getCategorie().getId() : null);
                 dto.setSousCategorieId(produit.getSousCategorie() != null ? produit.getSousCategorie().getId() : null);
                 dto.setBoutiqueId(produit.getBoutique() != null ? produit.getBoutique().getId() : null);

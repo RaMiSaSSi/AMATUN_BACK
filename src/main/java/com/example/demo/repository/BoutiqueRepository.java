@@ -29,4 +29,10 @@ public interface BoutiqueRepository extends JpaRepository<Boutique, Long> {
 
     @Query("SELECT DISTINCT p.boutique FROM Produit p WHERE p.promo = true")
     List<Boutique> findBoutiquesWithPromotionalProducts();
+
+    @Query("SELECT b FROM Boutique b JOIN CategoryShop cs ON b.categoryShopId = cs.id WHERE cs.name = :categoryName")
+    List<Boutique> findByCategoryShopName(@Param("categoryName") String categoryName);
+
+    @Query("SELECT b FROM Boutique b ORDER BY b.id")
+    Page<Boutique> findAllByOrderById(Pageable pageable);
 }

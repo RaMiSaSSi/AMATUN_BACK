@@ -18,8 +18,11 @@ public interface ProduitRepository extends JpaRepository<Produit, Long> {
     List<Produit> findBySousCategorieId(Long sousCategorieId);
     List<Produit> findByBoutiqueId(Long boutiqueId);
 
-    @Query("SELECT p FROM Produit p JOIN p.commandeProduits cp GROUP BY p ORDER BY SUM(cp.quantite) DESC")
-    List<Produit> findBestSellingProducts(@Param("limit") int limit);
+    @Query("SELECT p, SUM(cp.quantite) as totalQuantity " +
+            "FROM Produit p JOIN p.commandeProduits cp " +
+            "GROUP BY p.id " +
+            "ORDER BY totalQuantity DESC")
+    List<Object[]> findBestSellingProducts(@Param("limit") int limit);
     @Query("SELECT p FROM Produit p WHERE LOWER(p.nom) LIKE LOWER(CONCAT('%', :keyword, '%'))")
     List<Produit> searchByName(@Param("keyword") String keyword);
     Page<Produit> findAll(Pageable pageable);
@@ -44,6 +47,6 @@ public interface ProduitRepository extends JpaRepository<Produit, Long> {
     @Query("SELECT p FROM Produit p ORDER BY p.views DESC")
     Page<Produit> findTrendingProducts(Pageable pageable);
     // Java
-    @Query("SELECT p FROM Produit p WHERE p.promo = true")
+    @Query(value = "SELECT * FROM produit p WHERE p.promo = true AND CURRENT_DATE BETWEEN p.start_date AND (p.start_date + p.duree * INTERVAL '1 DAY')", nativeQuery = true)
     Page<Produit> findPromotionalProducts(Pageable pageable);
 }

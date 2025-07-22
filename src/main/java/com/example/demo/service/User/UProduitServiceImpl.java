@@ -57,8 +57,10 @@ public class UProduitServiceImpl implements UProduitService {
    }
     @Override
     public List<ProduitDTO> getBestSellingProducts(int limit) {
-        List<Produit> produits = produitRepository.findBestSellingProducts(limit);
-        return produits.stream().map(Produit::toDTO).collect(Collectors.toList());
+        List<Object[]> results = produitRepository.findBestSellingProducts(limit);
+        return results.stream()
+                .map(result -> ((Produit) result[0]).toDTO())
+                .collect(Collectors.toList());
     }
     @Override
     public List<ProduitDTO> getPopularProducts(int limit) {

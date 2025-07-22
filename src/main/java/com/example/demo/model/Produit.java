@@ -220,4 +220,5 @@ public class Produit {
         dto.setMarque(this.marque);
         return dto;
     }
+
 }

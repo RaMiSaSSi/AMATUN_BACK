@@ -28,9 +28,9 @@ import org.springframework.data.domain.Pageable;
                                 private FollowRepository followRepository;
 
                                 @Override
-                                public List<BoutiqueDTO> getAllBoutiques() {
-                                    List<Boutique> boutiques = boutiqueRepository.findAll();
-                                    return boutiques.stream().map(Boutique::getDTO).collect(Collectors.toList());
+                                public Page<BoutiqueDTO> getAllBoutiques(Pageable pageable) {
+                                    return boutiqueRepository.findAll(pageable)
+                                            .map(Boutique::getDTO);
                                 }
 
                                 @Override
@@ -120,6 +120,11 @@ import org.springframework.data.domain.Pageable;
                                 @Override
                                 public List<BoutiqueDTO> getBoutiquesWithPromotionalProducts() {
                                     List<Boutique> boutiques = boutiqueRepository.findBoutiquesWithPromotionalProducts();
+                                    return boutiques.stream().map(Boutique::getDTO).collect(Collectors.toList());
+                                }
+                                @Override
+                                public List<BoutiqueDTO> getBoutiquesByAutoMotoCategory() {
+                                    List<Boutique> boutiques = boutiqueRepository.findByCategoryShopName("Auto et Moto");
                                     return boutiques.stream().map(Boutique::getDTO).collect(Collectors.toList());
                                 }
                             }

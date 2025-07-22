@@ -19,8 +19,8 @@ public class UBoutiqueController {
     private UBoutiqueService uBoutiqueService;
 
     @GetMapping
-    public ResponseEntity<List<BoutiqueDTO>> getAllBoutiques() {
-        List<BoutiqueDTO> boutiques = uBoutiqueService.getAllBoutiques();
+    public ResponseEntity<Page<BoutiqueDTO>> getAllBoutiques(Pageable pageable) {
+        Page<BoutiqueDTO> boutiques = uBoutiqueService.getAllBoutiques(pageable);
         return ResponseEntity.ok(boutiques);
     }
 
@@ -83,6 +83,11 @@ public class UBoutiqueController {
     @GetMapping("/with-promotions")
     public ResponseEntity<List<BoutiqueDTO>> getBoutiquesWithPromotionalProducts() {
         List<BoutiqueDTO> boutiques = uBoutiqueService.getBoutiquesWithPromotionalProducts();
+        return ResponseEntity.ok(boutiques);
+    }
+    @GetMapping("/cars-boutiques")
+    public ResponseEntity<List<BoutiqueDTO>> getBoutiquesByAutoMotoCategory() {
+        List<BoutiqueDTO> boutiques = uBoutiqueService.getBoutiquesByAutoMotoCategory();
         return ResponseEntity.ok(boutiques);
     }
 }

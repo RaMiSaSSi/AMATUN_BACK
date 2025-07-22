@@ -124,7 +124,7 @@ public class BoutiqueServiceImpl implements BoutiqueService {
 
     @Override
     public Page<BoutiqueDTO> getAllBoutiques(Pageable pageable) {
-        return boutiqueRepository.findAll(pageable)
+        return boutiqueRepository.findAllByOrderById(pageable)
                 .map(boutique -> {
                     BoutiqueDTO boutiqueDTO = boutique.getDTO();
                     boutiqueDTO.setImagePath(boutique.getImagePath());
