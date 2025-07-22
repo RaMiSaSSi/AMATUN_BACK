@@ -1,10 +1,13 @@
-HELP.md
+# Ignore le dossier uploads (contenu local non versionné)
+uploads/
+
+# Fichiers temporaires générés par Maven
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-### STS ###
+# Eclipse / STS
 .apt_generated
 .classpath
 .factorypath
@@ -13,21 +16,30 @@ target/
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
+# IntelliJ IDEA
 .idea
 *.iws
 *.iml
 *.ipr
 
-### NetBeans ###
+# NetBeans
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
+
+# Dossiers de build alternatifs
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-### VS Code ###
+# VS Code
 .vscode/
+
+# Autres fichiers à ignorer
+*.log
+*.tmp
+*.bak
+*.swp
+.DS_Store
