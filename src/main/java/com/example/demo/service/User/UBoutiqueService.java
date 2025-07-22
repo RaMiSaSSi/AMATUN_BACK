@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface UBoutiqueService {
-    List<BoutiqueDTO> getAllBoutiques();
+    Page<BoutiqueDTO> getAllBoutiques(Pageable pageable);
     BoutiqueDTO getBoutiqueById(Long id);
     AdresseDTO getBoutiqueAdresseById(Long id);
     void followBoutique(Long utilisateurId, Long boutiqueId); // Add this method
@@ -22,4 +22,5 @@ public interface UBoutiqueService {
     int getProductCountByBoutiqueId(Long boutiqueId);
     boolean isBoutiqueFollowed(Long utilisateurId, Long boutiqueId);
     List<BoutiqueDTO> getBoutiquesWithPromotionalProducts();
+    List<BoutiqueDTO> getBoutiquesByAutoMotoCategory();
 }

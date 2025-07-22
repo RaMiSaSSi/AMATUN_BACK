@@ -50,7 +50,7 @@ public class CommandeController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "6") int size) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<CommandeDTO> commandes = commandeService.getAllCommandesPaggination(pageable);
+        Page<CommandeDTO> commandes = commandeService.getAllCommandesPaggination(   pageable);
         return ResponseEntity.ok(commandes);
     }
 }

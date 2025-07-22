@@ -6,6 +6,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+HELP.md
 
 # Eclipse / STS
 .apt_generated
@@ -43,5 +44,3 @@ build/
 *.bak
 *.swp
 .DS_Store
-uploads/
-uploads/
